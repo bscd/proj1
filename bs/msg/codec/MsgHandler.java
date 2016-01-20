@@ -1,6 +1,5 @@
 package bs.msg.codec;
 
-import bs.GDef;
 
 /**
  * 消息编解码的父类，用于定义消息映射的map

@@ -1,6 +1,7 @@
 package bs;
 
 import bs.msg.codec.*;
+import bs.netty.http.HttpServer;
 
 class TestMain
 {
@@ -11,10 +12,15 @@ class TestMain
         // 初始化消息处理map
         GDef.codecEventManager.init();
         
-        // 启动处理线程
+        // 启动codec处理线程
         MsgCodecThread t = new MsgCodecThread();
         t.start();
         
+        // 启动netty的http监听线程
+        HttpServer httpServer = HttpServer.getInstance(GConf.getConfMap());
+        httpServer.run();
+        
+        /*
         // 模拟消息入队列
         CodecEvent e = new CodecEvent();
         e.setEncode(false);
@@ -27,16 +33,21 @@ class TestMain
         e1.setMsgType(GDef.MSG_TYPE_LOGOUT);
         e1.setMsgJSON("{\"Name\":\"Jack.111\"}");
         GDef.codecQueue.add(e1);
+        */
         
+        while (true)
         try
         {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
+            System.out.println("[main thread] still alive.");
         } catch (InterruptedException ee)
         {
-            // TODO Auto-generated catch block
             ee.printStackTrace();
         }
         
+        /*
+        System.out.println("[main thread] will exit.");
         t.stopRunning();
+        */
     }
 }

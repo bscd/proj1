@@ -16,6 +16,8 @@ public class GDef
     public final static int RET_OK = 0;
     public final static int RET_ERR = -1;
     
+    public final static String RESULT_INVALIDMETHOD = "90001";
+    
     // 全局变量
     // 消息处理队列
     public static LinkedBlockingQueue<CodecEvent> codecQueue = new LinkedBlockingQueue<CodecEvent>();
